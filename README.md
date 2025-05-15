@@ -14,14 +14,20 @@ source(“https://raw.githubusercontent.com/YOUR_USERNAME/bayesian-cif/main/baye
 
 # Usage
 
-`cif_samples <- bayesian_cif(
-time = time_vector,
-event1 = event_cv,      # binary vector for event type 1
-event2 = event_ncv,     # binary vector for event type 2
-event_index = 1,        # choose 1 for event1 or 2 for event2
-alpha_prior = c(0.0001, 0.0001, 0.0001),  
-posterior_sample_size = 10000,          
-interval = 1)`
+<pre>
+```r
+cif_samples <- bayesian_cif(
+  time = time_vector,
+  event1 = event_cv,      # binary vector for event type 1
+  event2 = event_ncv,     # binary vector for event type 2
+  event_index = 1,        # choose 1 for event1 or 2 for event2
+  alpha_prior = c(0.0001, 0.0001, 0.0001), #optional 
+  posterior_sample_size = 10000, #optional
+  interval = 1 #optional 
+)
+```
+</pre>
+
 
 ## Arguments
 	•	time: Numeric vector of time-to-event or censoring values.
