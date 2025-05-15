@@ -22,8 +22,7 @@ event_index = 1,        # choose 1 for event1 or 2 for event2
 alpha_prior = c(0.0001, 0.0001, 0.0001),  # optional
 posterior_sample_size = 10000,           # optional
 interval = 1                             # optional
-)
-`
+)`
 
 ## Arguments
 	•	time: Numeric vector of time-to-event or censoring values.
@@ -34,9 +33,7 @@ interval = 1                             # optional
 	•	event_index: Integer: 1 for event1, 2 for event2.
 	•	interval: Time discretization interval (default: 1).
 
-## Output
-
-A data.frame with:
+## Output: a data.frame with
 	•	Rows = time points (from 0 to max observed time, spaced by interval)
 	•	Columns = posterior samples of the CIF for the chosen event
 
