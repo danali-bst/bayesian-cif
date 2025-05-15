@@ -41,15 +41,15 @@ Each column represents a full posterior trajectory for the CIF. You can compute 
 
 # Example
 
-cif_samples <- bayesian_cif(
+`cif_samples <- bayesian_cif(
 time = df$time,
 event1 = df$event_cv,
 event2 = df$event_ncv,
 event_index = 1,
 posterior_sample_size = 5000,
-interval = 10
-)
+interval = 1
+)`
 
-Summarize or visualize
-
+`
 mean_cif <- apply(cif_samples, 1, mean)
+`
