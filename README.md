@@ -1,4 +1,4 @@
-# Bayesian Cumulative Incidence Function estimator in R
+# Bayesian cumulative incidence function estimator in R
 
 An R function to compute posterior samples of the Bayesian cumulative incidence function (CIF) for competing risks using a Dirichlet-multinomial model.
 
