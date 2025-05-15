@@ -14,7 +14,7 @@ source(“https://raw.githubusercontent.com/YOUR_USERNAME/bayesian-cif/main/baye
 
 # Usage
 
-cif_samples <- bayesian_cif(
+`cif_samples <- bayesian_cif(
 time = time_vector,
 event1 = event_cv,      # binary vector for event type 1
 event2 = event_ncv,     # binary vector for event type 2
@@ -23,8 +23,9 @@ alpha_prior = c(0.0001, 0.0001, 0.0001),  # optional
 posterior_sample_size = 10000,           # optional
 interval = 1                             # optional
 )
+`
 
-Arguments
+## Arguments
 	•	time: Numeric vector of time-to-event or censoring values.
 	•	event1: Binary vector for event type 1 (e.g., CV death).
 	•	event2: Binary vector for event type 2 (e.g., non-CV death).
@@ -33,7 +34,7 @@ Arguments
 	•	event_index: Integer: 1 for event1, 2 for event2.
 	•	interval: Time discretization interval (default: 1).
 
-Output
+## Output
 
 A data.frame with:
 	•	Rows = time points (from 0 to max observed time, spaced by interval)
