@@ -21,8 +21,7 @@ event2 = event_ncv,     # binary vector for event type 2
 event_index = 1,        # choose 1 for event1 or 2 for event2
 alpha_prior = c(0.0001, 0.0001, 0.0001),  # optional
 posterior_sample_size = 10000,           # optional
-interval = 1                             # optional
-)`
+interval = 1                             # optional)`
 
 ## Arguments
 	•	time: Numeric vector of time-to-event or censoring values.
