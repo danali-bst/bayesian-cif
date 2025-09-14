@@ -5,7 +5,7 @@ This repository provides an R function to compute posterior samples of the **Bay
 The method is fully nonparametric and does not rely on proportional hazards or cause-specific hazard models. Instead, it uses a discrete-time Bayesian formulation with a Dirichlet prior on the daily hazard probabilities, producing posterior draws of the CIF that can be directly summarized and visualized.  
 
 This implementation accompanies the manuscript:  
-> **Daniel Paydarfar, Lu Tian, and Lee-Jen Wei. “Bayesian Survival Analysis in the Presence of Dependent Competing Risks – A Model-Free Approach.”** [oai_citation:1‡manuscript.docx](file-service://file-MApj7ip2q9ubGeVXki6HGi)
+> **Daniel Paydarfar, Lu Tian, and Lee-Jen Wei. “Bayesian Survival Analysis in the Presence of Dependent Competing Risks – A Model-Free Approach.”** 
 
 --------------------------------------------------------------------------------
 ## 1. Overview
