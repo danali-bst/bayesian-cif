@@ -15,7 +15,7 @@ library(gtools)  # For rdirichlet()
 bayesian_cif <- function(time,
                          event1,
                          event2,
-                         alpha_prior = c(0.0001, 0.0001, 0.0001),
+                         alpha_prior = c(0.0001, 0.0001, 1),
                          posterior_sample_size = 100000,
                          event_index = 1,
                          interval = 1) {
