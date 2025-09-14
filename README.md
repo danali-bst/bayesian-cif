@@ -1,4 +1,4 @@
-# Bayesian Cumulative Incidence Function (CIF) Estimator
+# Bayesian Cumulative Incidence Function (CIF) Tutorial
 
 This repository provides an R function to compute posterior samples of the **Bayesian cumulative incidence function (CIF)** for competing risks using a **Dirichlet–multinomial** approach.  
 
