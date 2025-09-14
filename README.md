@@ -42,7 +42,7 @@ A Dirichlet prior ensures conjugacy, so the posterior is also Dirichlet and can 
 --------------------------------------------------------------------------------
 ## 2. Installing / Loading the Function
 
-Download or clone this repository, then load the function directly into R:
+Download or clone this repository and source("bayesian_cif.R") from working directory, or load the function directly into R via the following command in R:
 
 ```r
 # Source directly from GitHub
