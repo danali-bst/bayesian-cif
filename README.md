@@ -10,7 +10,7 @@ This function returns posterior sample trajectories for the CIF of a specified e
 
 No package installation is needed — you can source the function directly into R using:
 
-source(“https://raw.githubusercontent.com/danali-bst/bayesian-cif/main/bayesian_cif.R”)
+source(“https://github.com/danali-bst/bayesian-cif/main/bayesian_cif.R”)
 
 # Usage
 
