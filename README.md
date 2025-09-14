@@ -25,7 +25,7 @@ A Dirichlet prior ensures conjugacy, so the posterior is also Dirichlet and can 
   - `event1`: binary indicator vector for event type 1.  
   - `event2`: binary indicator vector for event type 2.  
   - `event_index`: choose which event’s CIF to compute (`1` for event1, `2` for event2).  
-  - `alpha_prior`: length-3 vector of Dirichlet prior parameters (default: `c(0.0001, 0.0001, 0.0001)`).  
+  - `alpha_prior`: length-3 vector of Dirichlet prior parameters (default: `c(0.0001, 0.0001, 1)`).  
   - `posterior_sample_size`: number of posterior samples (default: 100000).  
   - `interval`: discretization interval for time (default: 1).  
 
@@ -35,8 +35,8 @@ A Dirichlet prior ensures conjugacy, so the posterior is also Dirichlet and can 
 ### 1.2 Why Use This Approach?
 
 - **Model-free**: No assumptions of proportional hazards.  
-- **Fully Bayesian**: Uncertainty is captured naturally via posterior samples.  
-- **Flexible**: Handles arbitrary competing risks with customizable priors.  
+- **Fully Bayesian**: Uncertainty is captured naturally via posterior samples, yielding interpretations like "there’s a 95% chance the true survival or RMST lies in this range”.  
+- **Flexible**: Handles arbitrary numbers of competing risks with customizable priors.  
 - **Efficient**: Conjugacy of the Dirichlet–multinomial ensures fast computation.  
 
 --------------------------------------------------------------------------------
@@ -71,7 +71,7 @@ cif_samples <- bayesian_cif(
   event1 = df$event_cv,
   event2 = df$event_ncv,
   event_index = 1,             # compute CIF for CV death
-  alpha_prior = c(0.0001, 0.0001, 0.0001),
+  alpha_prior = c(0.0001, 0.0001, 1),
   posterior_sample_size = 5000,
   interval = 1
 )
@@ -106,26 +106,7 @@ Interpretation: The dashed bands represent posterior uncertainty in the CIF traj
 --------------------------------------------------------------------------------
 ## 4. Additional Summaries
 
-### 4.1 Cumulative Incidence at a Fixed Time
-
-Often we want the posterior distribution of CIF at a clinically meaningful time horizon (e.g., 10 years).  
-
-```r
-# Choose a time horizon
-tau <- 10
-
-# Extract posterior samples of CIF at tau
-cif_at_tau <- cif_samples[tau, ]
-
-# Posterior mean and 95% CI
-mean_tau <- mean(cif_at_tau)
-ci_tau   <- quantile(cif_at_tau, c(0.025, 0.975))
-
-cat("Posterior mean CIF at time", tau, "=", mean_tau, "\n")
-cat("95% Credible Interval =", ci_tau, "\n")
-```
-
-### 4.2 Cause-Specific Restricted Mean Time Lost (RMTL)
+### Cause-Specific Restricted Mean Time Lost (RMTL)
 
 The area under the CIF curve up to time `tau` is the **restricted mean time lost** due to that cause (complementary to RMST).  
 
@@ -139,46 +120,23 @@ cat("Posterior mean RMTL up to day", tau, "=", rmtl_mean, "\n")
 cat("95% Credible Interval =", rmtl_ci, "\n")
 ```
 
-This corresponds to the “AUC of the CIF” discussed in the manuscript [oai_citation:2‡manuscript.docx](file-service://file-MApj7ip2q9ubGeVXki6HGi).
+This corresponds to the “AUC of the CIF” discussed in the manuscript.
 
 --------------------------------------------------------------------------------
-## 5. Arguments
-
-- `time`: Numeric vector of event/censoring times.  
-- `event1`: Binary indicator vector for event type 1.  
-- `event2`: Binary indicator vector for event type 2.  
-- `event_index`: Integer (1 or 2), which CIF to estimate.  
-- `alpha_prior`: Dirichlet prior hyperparameters (length 3).  
-- `posterior_sample_size`: Number of posterior draws.  
-- `interval`: Time discretization interval.  
-
---------------------------------------------------------------------------------
-## 6. Output
-
-- **Matrix of posterior CIF draws**:  
-  - Rows = discrete time points.  
-  - Columns = posterior samples.  
-- Each column represents one posterior trajectory.  
-- From this, you can compute posterior means, credible intervals, or restricted mean times.  
-
---------------------------------------------------------------------------------
-## 7. Extensions
+## 5. Extensions
 
 - Can be generalized to >2 competing risks by extending the Dirichlet dimension.  
 - Priors can be adjusted to reflect prior knowledge about relative event frequencies.  
 - Posterior samples can be combined across strata (similar to the [Bayesian survival tutorial](https://github.com/danali-bst/bayesian-survival-tutorial)).  
 
 --------------------------------------------------------------------------------
-## 8. References
-
-- Paydarfar D, Tian L, Wei LJ. *Bayesian Survival Analysis in the Presence of Dependent Competing Risks – A Model-Free Approach.* Harvard/Stanford. [Manuscript] [oai_citation:3‡manuscript.docx](file-service://file-MApj7ip2q9ubGeVXki6HGi)  
-- Andersen PK, Geskus RB, de Witte T, Putter H. *Competing risks in epidemiology: possibilities and pitfalls.* Int J Epidemiol. 2012;41(3):861–870.  
-- Fleming TR, Harrington DP. *Counting processes and survival analysis.* John Wiley & Sons; 1991.  
-- Hjort NL. *Nonparametric Bayes estimators based on beta processes in models for life history data.* Ann Stat. 1990;18(3):1259–1294.  
-
---------------------------------------------------------------------------------
-## 9. Closing Notes
+## 6. Closing Notes
 
 This Bayesian CIF estimator provides a simple and flexible alternative to cause-specific or subdistribution hazards. It is especially useful for visualizing uncertainty and performing inference without relying on hazard models.  
 
 For questions or contributions, please open an issue or pull request in this repository, or contact Daniel Paydarfar at danielpaydarfar@fas.harvard.edu.
+
+--------------------------------------------------------------------------------
+## 7. References
+
+- Paydarfar D, Tian L, Wei LJ. *Bayesian Survival Analysis in the Presence of Dependent Competing Risks – A Model-Free Approach.*  
