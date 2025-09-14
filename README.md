@@ -112,6 +112,7 @@ The area under the CIF curve up to time `tau` is the **restricted mean time lost
 
 ```r
 # Compute RMTL up to tau
+tau = 10
 rmtl_draws <- colSums(cif_samples[1:tau, ])
 rmtl_mean  <- mean(rmtl_draws)
 rmtl_ci    <- quantile(rmtl_draws, c(0.025, 0.975))
