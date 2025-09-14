@@ -80,7 +80,7 @@ dim(cif_samples)
 # rows = number of discrete time points, cols = posterior samples
 ```
 
-### 3.1 Summarizing the Posterior
+### 3.1 Summarizing the Posterior (e.g. Posterior Mean)
 
 ```r
 # Posterior mean CIF
