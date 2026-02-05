@@ -42,7 +42,7 @@ bayesian_cif <- function(time,
     count_e2 <- sum(event2[time == discretized_time[t]])
 
     # Posterior sampling
-    observed_counts <- c(count_e1, count_e2, current_risk_set)
+    observed_counts <- c(count_e1, count_e2, current_risk_set - count_e1 - count_e2)
     posterior_samples <- rdirichlet(posterior_sample_size, observed_counts + alpha_prior)
 
     # Update CIF for specified event index
