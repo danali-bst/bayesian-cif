@@ -182,7 +182,7 @@ $$
 
 The posterior distribution of CIF can be obtained through the previous realizations of $\{r_1(t),\ r_2(t)\colon\ t=1,\ \ldots,\ M\}$. Lastly, the area under the $F_1(t)$ can be approximated and used to compare two treatment groups by examining the difference or ratio of their AUCs.
 
-When there is limited information about the daily hazards, a common practice is to choose a prior which would have a small impact on the final analysis. That is, we may choose very small parameter values for \( (\alpha_1,\alpha_2,\alpha_3) \).
+When there is limited information about the daily hazards, a common practice is to choose a prior which would have a small impact on the final analysis. That is, we may choose very small parameter values for $(\alpha_1,\alpha_2,\alpha_3)$.
 
 
 
