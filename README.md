@@ -140,23 +140,49 @@ For questions or contributions, please open an issue or pull request in this rep
 --------------------------------------------------------------------------------
 ## 7. Appendix (mathematical description of method)
 
-Bayesian methods for making inferences about CIF and its summary measures
-Let us consider a scenario involving two types of events: first heart failure hospitalization or CV death and non-CV death as in the PARAGON-HF trial. Extending this case to more than two events of interest is straightforward. Now, in practice, "day" is typically used as the smallest time unit for recording survival events. Accordingly, we consider analysis based on the data collected at discrete time points: t=1,\ \ldots\ ,\ M. For example, in the PARAGON-HF data, M=1500. On day t, let r_1\left(t\right) represent the cause-specific hazard of first heart failure hospitalization or CV death, which is the conditional probability that a patient experiences the composite outcome on day t, given survival up to that day. Similarly, let r_2\left(t\right) be the conditional probability of non-CV death. The overall survival function at day t can be expressed as
-S\left(t\right)=\ Pr\ \left(survival\ time\ >\ t\right)=\prod_{s=1}^{t}{\left(1-r_1\left(s\right)-r_2\left(s\right)\right).}
-       At each time t, a patient's outcome follows a three-category multinomial distribution with two free parameters, r_1\left(t\right) and r_2\left(t\right). We consider a conjugate prior for this multinomial variable: a Dirichlet distribution with parameters (\alpha_1,\alpha_2,\alpha_3). For the entire M\ days, the prior is the product of M individual Dirichlet priors, which is proportional to
-\prod_{t=1}^{M}{\ r_1\left(t\right)^{\alpha_1}r_2\left(t\right)^{\alpha_2}\left(1-r_1\left(t\right)-r_2\left(t\right)\right)^{\alpha_3}\ }
-       To construct the likelihood function for the parameters {r_1\left(t\right),\ r_2\left(t\right)\∶\ t=1,\ \ldots,\ M}, the contribution from an individual patient observed at time t is as follows:
-	If the patient experiences the composite outcome (category 1), the contribution is r_1\left(t\right)\times S(t-1) 
-	If the patient dies due to non-CV causes (category 2), the contribution is r_2\left(t\right)\times S(t-1) 
-	If the patient is alive after t (category 3), the contribution is (1-r_1\left(t\right)-r_2\left(t\right))\times S(t-1) 
-The full likelihood L is proportional to the product of these individual contributions across M days:
-\prod_{t=1}^{M}{r_1\left(t\right)^{d_1\left(t\right)}r_2\left(t\right)^{d_2\left(t\right)}}\left(1-r_1\left(t\right)-r_2\left(t\right)\right)^{n\left(t\right)-d_1\left(t\right)-d_2(t)},
-where d_1(t) and d_2\left(t\right) are the observed numbers of patients in categories 1 and 2, respectively, and n\left(t\right) is the number of patients who survived past t-1. The likelihood function L can be interpreted similarly to treating M independent multinomial experiments, a result justified through survival analysis martingale theory [14].
-At time t, the posterior distribution is also Dirichlet with parameters (\alpha_1+d_1\left(t\right),\ \alpha_2+d_2\left(t\right),\ \alpha_3+n\left(t\right)-d_1\left(t\right)-d_2\left(t\right)). The complete posterior distribution is the product of these M individual posterior distributions. One can then generate a large number of realizations of this Dirichlet distribution to approximate the posterior distribution. The cumulative incidence function for first heart failure hospitalization or CV death is given by:
-F_1\left(t\right)=\sum_{s=1}^{t}{r_1\left(s\right)\prod_{u=1}^{s-1}\left(1-r_1\left(u\right)-r_2\left(u\right)\right)}.
-The posterior distribution of CIF can be obtained through the previous realizations of {r_1\left(t\right),\ r_2\left(t\right)\∶\ t=1,\ \ldots,\ M}. Lastly, the area under the F_1\left(t\right) can be approximated and used to compare two treatment groups by examining the difference or ratio of their AUCs.
-When there is limited information about the daily hazards, a common practice is to choose a prior which would have a small impact on the final analysis. That is, we may choose very small parameter values for (\alpha_1,\alpha_2,\alpha_3). 
-<img width="468" height="644" alt="image" src="https://github.com/user-attachments/assets/2040f0ac-ad2a-437a-9731-286c5685fe7c" />
+Let us consider a scenario involving two types of events: first heart failure hospitalization or CV death and non-CV death as in the PARAGON-HF trial. Extending this case to more than two events of interest is straightforward.
+
+Now, in practice, "day" is typically used as the smallest time unit for recording survival events. Accordingly, we consider analysis based on the data collected at discrete time points:
+
+$$
+t = 1, \ldots, M.
+$$
+
+For example, in the PARAGON-HF data, \( M = 1500 \). On day \( t \), let \( r_1(t) \) represent the cause-specific hazard of first heart failure hospitalization or CV death, which is the conditional probability that a patient experiences the composite outcome on day \( t \), given survival up to that day. Similarly, let \( r_2(t) \) be the conditional probability of non-CV death. The overall survival function at day \( t \) can be expressed as
+
+$$
+S(t) = Pr\ (survival\ time\ >\ t) = \prod_{s=1}^{t}\left(1-r_1(s)-r_2(s)\right).
+$$
+
+At each time \( t \), a patient's outcome follows a three-category multinomial distribution with two free parameters, \( r_1(t) \) and \( r_2(t) \). We consider a conjugate prior for this multinomial variable: a Dirichlet distribution with parameters \( (\alpha_1,\alpha_2,\alpha_3) \). For the entire \( M \) days, the prior is the product of \( M \) individual Dirichlet priors, which is proportional to
+
+$$
+\prod_{t=1}^{M} r_1(t)^{\alpha_1} r_2(t)^{\alpha_2} \left(1-r_1(t)-r_2(t)\right)^{\alpha_3}
+$$
+
+To construct the likelihood function for the parameters \( \{r_1(t),\ r_2(t)\colon\ t=1,\ \ldots,\ M\} \), the contribution from an individual patient observed at time \( t \) is as follows:
+
+- If the patient experiences the composite outcome (category 1), the contribution is \( r_1(t)\times S(t-1) \)
+- If the patient dies due to non-CV causes (category 2), the contribution is \( r_2(t)\times S(t-1) \)
+- If the patient is alive after \( t \) (category 3), the contribution is \( (1-r_1(t)-r_2(t))\times S(t-1) \)
+
+The full likelihood \( L \) is proportional to the product of these individual contributions across \( M \) days:
+
+$$
+\prod_{t=1}^{M} r_1(t)^{d_1(t)} r_2(t)^{d_2(t)} \left(1-r_1(t)-r_2(t)\right)^{n(t)-d_1(t)-d_2(t)},
+$$
+
+where \( d_1(t) \) and \( d_2(t) \) are the observed numbers of patients in categories 1 and 2, respectively, and \( n(t) \) is the number of patients who survived past \( t-1 \). The likelihood function \( L \) can be interpreted similarly to treating \( M \) independent multinomial experiments, a result justified through survival analysis martingale theory [14].
+
+At time \( t \), the posterior distribution is also Dirichlet with parameters \( (\alpha_1+d_1(t),\ \alpha_2+d_2(t),\ \alpha_3+n(t)-d_1(t)-d_2(t)) \). The complete posterior distribution is the product of these \( M \) individual posterior distributions. One can then generate a large number of realizations of this Dirichlet distribution to approximate the posterior distribution. The cumulative incidence function for first heart failure hospitalization or CV death is given by:
+
+$$
+F_1(t)=\sum_{s=1}^{t} r_1(s)\prod_{u=1}^{s-1}\left(1-r_1(u)-r_2(u)\right).
+$$
+
+The posterior distribution of CIF can be obtained through the previous realizations of \( \{r_1(t),\ r_2(t)\colon\ t=1,\ \ldots,\ M\} \). Lastly, the area under the \( F_1(t) \) can be approximated and used to compare two treatment groups by examining the difference or ratio of their AUCs.
+
+When there is limited information about the daily hazards, a common practice is to choose a prior which would have a small impact on the final analysis. That is, we may choose very small parameter values for \( (\alpha_1,\alpha_2,\alpha_3) \).
 
 
 
