@@ -148,7 +148,7 @@ $$
 t = 1, \ldots, M.
 $$
 
-For example, in the PARAGON-HF data, $ M = 1500 $. On day \( t \), let \( r_1(t) \) represent the cause-specific hazard of first heart failure hospitalization or CV death, which is the conditional probability that a patient experiences the composite outcome on day \( t \), given survival up to that day. Similarly, let \( r_2(t) \) be the conditional probability of non-CV death. The overall survival function at day \( t \) can be expressed as
+For example, in the PARAGON-HF data, $M = 1500$. On day \( t \), let \( r_1(t) \) represent the cause-specific hazard of first heart failure hospitalization or CV death, which is the conditional probability that a patient experiences the composite outcome on day \( t \), given survival up to that day. Similarly, let \( r_2(t) \) be the conditional probability of non-CV death. The overall survival function at day \( t \) can be expressed as
 
 $$
 S(t) = Pr\ (survival\ time\ >\ t) = \prod_{s=1}^{t}\left(1-r_1(s)-r_2(s)\right).
